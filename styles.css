@@ -1,0 +1,67 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #22212C;
+  color: #FFFFFF;
+}
+
+#container {
+  margin: 0 auto;
+  width: 1080px;
+  max-width: 100%;
+  padding: 20px;
+  background-color: #454158;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#color-input {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+}
+
+#color-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+  padding-bottom: 20px;
+}
+
+.color-block {
+  width: 240px;
+  height: 240px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-block.disabled {
+  width: 100%;
+  margin-right: 0;
+}
+
+.color-block > div {
+  font-size: 20px;
+  text-align: center;
+  padding: 20px;
+}
+
+.color-block > div.hidden {
+  display: none;
+}
+
+#download-btn {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  font-size: 16px;
