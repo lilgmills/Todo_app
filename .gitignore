@@ -1,0 +1,8 @@
+# Ignore virtual environment
+venv/
+
+# Ignore any compiled Python files
+*.pyc
+
+# Ignore database files
+*.db

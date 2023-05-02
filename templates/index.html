@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Todo List</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+</head>
+<body>
+  <h1>Todo List</h1>
+  
+    
+    <div class="container">
+    {% if items %}
+    
+    <ul class="todo-list">
+    {% for item in items %}
+    <li>
+    <div class="row">
+        
+        <form method="post" action="{{ url_for('update_item', item_id=item[0]) }}">
+            <input type="hidden" name="item_id" value="{{item[0]}}">
+            <input class="checkbox-button" type="checkbox" name="done" title="Check" {% if item[2] == 1 %}checked{% endif %} onchange="this.form.submit()">
+            <div class="col-75">
+            {{ item[1] }}
+            </div>
+        </form>
+        
+        
+    </div>
+
+        <div class="button-column">  
+        <form method="post" action="{{ url_for('delete') }}">
+            <input type ="hidden" name="item_id" value="{{item[0]}}">
+            <button class="delete-button" type="submit" title="Delete">✖</button>
+        </form>
+        </div>
+    
+    </li>
+    
+    {% endfor %}
+    </ul>
+    
+    {% else %}
+    <div class = "no-items-shadow">
+    <p class="no-items">Add a new item to get started</p>
+    </div>
+    {% endif %}
+    
+   
+  
+  <form class="add-item" id="new-item-form" method="post" action="{{ url_for('add_item') }}">
+    <input type="text" id="new-item-input" placeholder="Add a new item..." name="new_item" autocomplete="off">
+    <button  type="submit" title="Add item">Add Item</button>
+  </form>
+
+  
+<script src="{{url_for('static', filename='valid-add-item.js') }}"></script>
+</body>
+</html>
