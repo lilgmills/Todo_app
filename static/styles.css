@@ -82,7 +82,7 @@ form.add-item {
 }
 
 .button-column {
-  display: inline-block;
+  display: flex;
   margin-left: 10px;
   margin-right: 0;
 }
@@ -118,6 +118,7 @@ form.add-item {
   padding: 1px 4px;
   border-radius: 3px;
   cursor: pointer;
+  margin-right:10px;
 }
 
 .delete-button:hover {
@@ -149,6 +150,36 @@ ul.todo-list li:last-child {
   border-bottom: none;
 }
 
-.add-item {
-  
+body {
+  background-color: #fff;
+  color: #333;
 }
+
+body.night-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.switch {
+  display: inline-block;
+  position: fixed;
+  bottom: 40px;
+  right: 100px;
+  z-index: 1;
+}
+
+.night-mode-text {
+    font-family: 'Open Sans', sans-serif;
+    display: inline-block;
+    margin-left: 5px;
+
+html, body {
+  height: 100%;
+}
+
+
+
+
+
+
+

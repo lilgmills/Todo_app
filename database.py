@@ -33,6 +33,13 @@ def update_completed_task(dbase, item_id, done_int):
     conn.commit()
     conn.close()
 
+def edit_task(dbase, item_id, new_text):
+    conn = sqlite3.connect(dbase)
+    c = conn.cursor()
+    c.execute("UPDATE items SET name = ? WHERE id = ?", (new_text, item_id,))
+    conn.commit()
+    conn.close()
+
 def delete_task(dbase, item_id):
     conn = sqlite3.connect(dbase)
     c = conn.cursor()
