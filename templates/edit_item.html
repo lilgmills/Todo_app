@@ -5,13 +5,11 @@
 </head>
 <body>
     <h1>Edit Item</h1>
-    <form method="POST" action="{{ url_for('update_item', item_id=item.id) }}">
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="{{ item.description }}" required>
-        <br>
-        <label for="completed">Completed:</label>
-        <input type="checkbox" id="completed" name="completed" {% if item.completed %}checked{% endif %}>
-        <br>
+    <form method="POST" action="{{ url_for("post_edit") }}">
+        <input type="text" id="description" name="new_text" value="{{ desc}}" required>
+        <input type ="hidden" name="item_id" value="{{ item_id }}">
+        
+        
         <button type="submit">Save</button>
     </form>
 </body>

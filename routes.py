@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request, redirect, url_for, render_template
 import os
 
-from database import get_items, add_task, delete_task, update_completed_task, get_db_connection
+from database import get_items, add_task, delete_task, edit_task, update_completed_task, get_db_connection
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 DATABASE=os.path.join(basedir,'test_items.db')
@@ -35,6 +35,23 @@ def update_item():
     done_int = 1 if done == 'on' else 0
     update_completed_task(DATABASE, item_id, done_int)
     return redirect(url_for('index'))
+
+@app.route('/new_edit/', methods=['GET', 'POST'])
+def new_edit():
+    if request.method == 'POST':
+        item_id = request.form['item_id']
+        desc = request.form['desc']
+        return render_template('edit_item.html', item_id=item_id, desc=desc)
+    else:
+        return redirect(url_for('index'))
+
+@app.route('/post_edit/', methods = ['GET','POST'])
+def post_edit():
+    item_id = request.form['item_id']
+    new_text = request.form['new_text']
+    edit_task(DATABASE, item_id, new_text)
+    return redirect(url_for(('index')))
+    
 
 @app.route('/delete/', methods=['POST'])
 def delete():

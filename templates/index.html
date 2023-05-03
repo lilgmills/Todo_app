@@ -20,7 +20,7 @@
         
         <form method="post" action="{{ url_for('update_item', item_id=item[0]) }}">
             <input type="hidden" name="item_id" value="{{item[0]}}">
-            <input class="checkbox-button" type="checkbox" name="done" title="Check" {% if item[2] == 1 %}checked{% endif %} onchange="this.form.submit()">
+            <input class="checkbox-button" type="checkbox" name="done" title="Check" {% if item[2] == 1 %}checked{% endif %} onchange="this.form.submit()"> 
             <div class="col-75">
             {{ item[1] }}
             </div>
@@ -34,7 +34,17 @@
             <input type ="hidden" name="item_id" value="{{item[0]}}">
             <button class="delete-button" type="submit" title="Delete">✖</button>
         </form>
+        <form method="post" action="{{ url_for('new_edit') }}">
+            <input type="hidden" name="item_id" value="{{ item[0] }}">
+            <input type="hidden" name="desc" value="{{ item[1] }}">
+            <button type="submit">Edit</button>
+        </form>
         </div>
+
+        
+
+
+        
     
     </li>
     
@@ -47,7 +57,19 @@
     </div>
     {% endif %}
     
-   
+  
+  <label class="switch">
+  
+    
+    <input type="checkbox" id="night-mode-toggle">
+    
+    
+    
+    <span class="slider round"></span>
+    <p class="night-mode-text">night mode</p>
+  
+  </label>
+ 
   
   <form class="add-item" id="new-item-form" method="post" action="{{ url_for('add_item') }}">
     <input type="text" id="new-item-input" placeholder="Add a new item..." name="new_item" autocomplete="off">
@@ -56,5 +78,6 @@
 
   
 <script src="{{url_for('static', filename='valid-add-item.js') }}"></script>
+<script src="{{url_for('static', filename='night-mode-toggle.js') }}"></script>
 </body>
 </html>
