@@ -3,9 +3,10 @@ import sqlite3
 def create_todo_table(dbase):
     conn = sqlite3.connect(dbase)
     c = conn.cursor()
+    #c.execute('''DROP TABLE IF EXISTS items''')
     c.execute('''CREATE TABLE IF NOT EXISTS items
                  (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                 item TEXT NOT NULL,
+                 name TEXT NOT NULL,
                  done INTEGER DEFAULT 0)''')
     conn.commit()
     conn.close()
