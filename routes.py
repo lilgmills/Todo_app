@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request, redirect, url_for, render_template
 import os
 
-from database import get_items, add_task, delete_task, edit_task, update_completed_task, get_db_connection
+from database import get_items, add_task, delete_task, edit_task, update_completed_task, create_todo_table, get_db_connection
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 DATABASE=os.path.join(basedir,'test_items.db')
@@ -74,4 +74,5 @@ def init_db():
 # run the app
 if __name__ == '__main__':
     #init_db()
+    create_todo_table(DATABASE)
     app.run(port=8000, debug=True)
