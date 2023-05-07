@@ -11,15 +11,16 @@ h1 {
   justify-content: center;
   max-width: 800px;
   margin: 0 auto;
+  padding-bottom: 50px;
 }
+
+
 
 li {
   font-family: 'Open Sans', sans-serif;
 }
 
-.new-item-input {
-  font-family: 'Open Sans', sans-serif;
-}
+
 
 .no-items {
   color: #999;
@@ -31,30 +32,87 @@ li {
   box-shadow: 0 -5px 5px -5px rgba(0,0,0,0.5);
 }
 
-form.add-item {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  // max-width: 900px; /* adjust as needed */
-  margin: 0 auto; /* center horizontally */
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  justify-content: center;
-  width: 100%;
-  padding: 10px;
-  background-color: #f2f2f2;
-  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif; /* added font family */
+.add-button {
+    background-color: #22A7F0;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.add-item input[type="text"] {
-  font-family: 'Open Sans', sans-serif;
-  width: 80%;
-  max-width: 800px;
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
 }
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    background-color: #f2f2f2;
+    box-shadow: 2px 0 2px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+}
+
+.sidebar.hide {
+    animation: slideOut 0.5s forwards;
+}
+
+.sidebar.show {
+    animation: slideIn 0.5s forwards;
+}
+
+.sidebar.night-mode {
+    background-color: #222;
+}
+
+#new-item-input {
+    font-family: 'Open Sans', sans-serif;
+    width:50%;
+    font-size: 18px;
+}
+
+form.add-item {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto; /* center horizontally */
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #f2f2f2;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif; /* added font family */
+    
+}
+
+
 
 .row {
   display: flex;
@@ -67,8 +125,14 @@ form.add-item {
   vertical-align: center;
 }
 
+.col-75.checked {
+    display: inline-block;
+    vertical-align: center;
+    
+}
+
 .item-column {
-  display: inline-block;
+    display: inline-block;
 }
 
 .checkbox-button {
@@ -146,6 +210,7 @@ ul.todo-list li {
 }
 
 
+
 ul.todo-list li:last-child {
   border-bottom: none;
 }
@@ -160,11 +225,89 @@ body.night-mode {
   color: #fff;
 }
 
+body.night-mode .sidebar{
+
+    background-color: #222;
+    color: #fff;
+}
+
+
+#sidebar-toggle {
+    width: 30px;
+    height: 30px;
+    border-width: 0px;
+    // border-radius: 75%;
+    background-color: #b2b2c2;
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    position: fixed;
+    top: 10px;
+    left: 200px;
+    cursor: pointer;
+}
+
+body.night-mode #sidebar-toggle {
+    background-color: #555555;
+    color: #ffffff;
+}
+
+#sidebar-toggle:before {
+    content: '\2039';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.sidebar.hide ~ #sidebar-toggle:before {
+    content: '\203A';
+}
+
+.sidebar.hide ~ #sidebar-toggle {
+    animation: toggleSlideOut 0.5s forwards;
+}
+
+.sidebar.show ~ #sidebar-toggle {
+    animation: toggleSlideIn 0.5s forwards;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.profile-picture {
+    font-size: 36px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #888;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.profile-name {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 .switch {
   display: inline-block;
   position: fixed;
-  bottom: 40px;
-  right: 100px;
+  bottom: 11px;
+  right: 70px;
   z-index: 1;
 }
 
@@ -172,14 +315,15 @@ body.night-mode {
     font-family: 'Open Sans', sans-serif;
     display: inline-block;
     margin-left: 5px;
-
+    color: #333;
+}
+ 
 html, body {
   height: 100%;
+
 }
 
-#container {
-    padding-bottom: 200px;
-}
+
 
 
 
