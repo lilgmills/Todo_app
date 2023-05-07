@@ -7,73 +7,80 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 </head>
 <body>
-  <h1>Todo List</h1>
-  
-    
-    <div class="container">
-    {% if items %}
-    
-    <ul class="todo-list">
-    {% for item in items %}
-    <li>
-    <div class="row">
-        
-        <form method="post" action="{{ url_for('update_item', item_id=item[0]) }}">
-            <input type="hidden" name="item_id" value="{{item[0]}}">
-            <input class="checkbox-button" type="checkbox" name="done" title="Check" {% if item[2] == 1 %}checked{% endif %} onchange="this.form.submit()"> 
-            <div class="col-75">
-            {{ item[1] }}
-            </div>
-        </form>
-        
-        
-    </div>
-
-        <div class="button-column">  
-        <form method="post" action="{{ url_for('delete') }}">
-            <input type ="hidden" name="item_id" value="{{item[0]}}">
-            <button class="delete-button" type="submit" title="Delete">✖</button>
-        </form>
-        <form method="post" action="{{ url_for('new_edit') }}">
-            <input type="hidden" name="item_id" value="{{ item[0] }}">
-            <input type="hidden" name="desc" value="{{ item[1] }}">
-            <button type="submit">Edit</button>
-        </form>
+    <h1>Todo List</h1>
+    <div class="sidebar show" >
+        <div class="user-profile">
+            <div class="profile-picture">U</div>
+            <div class="profile-name">User Profile</div>
         </div>
-        
-    
-    </li>
-    
-    {% endfor %}
-    </ul>
-    
-    {% else %}
-    <div class = "no-items-shadow">
-    <p class="no-items">Add a new item to get started</p>
     </div>
-    {% endif %}
-    
-  
-  <label class="switch">
-  
-    
-    <input type="checkbox" id="night-mode-toggle">
-    
-    
-    
-    <span class="slider round"></span>
-    <p class="night-mode-text">night mode</p>
-  
-  </label>
- 
-  
-  <form class="add-item" id="new-item-form" method="post" action="{{ url_for('add_item') }}">
-    <input type="text" id="new-item-input" placeholder="Add a new item..." name="new_item" autocomplete="off">
-    <button  type="submit" title="Add item">Add Item</button>
-  </form>
+    <button id="sidebar-toggle" title="Hide/show sidebar"></button>
+    <div class="container">
+        {% if items %}
 
-  
-<script src="{{url_for('static', filename='valid-add-item.js') }}"></script>
-<script src="{{url_for('static', filename='night-mode-toggle.js') }}"></script>
+        <ul class="todo-list">
+            {% for item in items %}
+            <li>
+                <div class="row">
+
+                    <form method="post" action="{{ url_for('update_item', item_id=item[0]) }}">
+                        <input type="hidden" name="item_id" value="{{item[0]}}">
+                        <input class="checkbox-button" type="checkbox" name="done" title="Check" {% if item[2]==1 %}checked{% endif %} onchange="this.form.submit()">
+                        <div class="col-75">
+                            <p id="todo-item-text">{{ item[1] }}</p>
+
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <div class="button-column">
+                    <form method="post" action="{{ url_for('delete') }}">
+                        <input type="hidden" name="item_id" value="{{item[0]}}">
+                        <button class="delete-button" type="submit" title="Delete">✖</button>
+                    </form>
+                    <form method="post" action="{{ url_for('new_edit') }}">
+                        <input type="hidden" name="item_id" value="{{ item[0] }}">
+                        <input type="hidden" name="desc" value="{{ item[1] }}">
+                        <button type="submit">Edit</button>
+                    </form>
+                </div>
+
+
+            </li>
+
+            {% endfor %}
+        </ul>
+
+        {% else %}
+        <div class="no-items-shadow">
+            <p class="no-items">Add a new item to get started</p>
+        </div>
+        {% endif %}
+
+
+        <label class="switch">
+
+
+            <input type="checkbox" id="night-mode-toggle">
+
+
+
+            <span class="slider round"></span>
+            <p class="night-mode-text">night mode</p>
+
+        </label>
+
+
+        <form class="add-item" id="new-item-form" method="post" action="{{ url_for('add_item') }}">
+            <input type="text" id="new-item-input" placeholder="Add a new item..." name="new_item" autocomplete="off">
+            <button class="add-button" type="submit" title="Add item">Add</button>
+        </form>
+
+
+        <script src="{{url_for('static', filename='valid-add-item.js') }}"></script>
+        <script src="{{url_for('static', filename='night-mode-toggle.js') }}"></script>
+        <script src="{{url_for('static', filename='sidebar-toggle.js') }}"></script>
 </body>
 </html>
