@@ -125,54 +125,55 @@ form.add-item {
   vertical-align: center;
 }
 
-.col-75.checked {
+.checkbox-button:checked ~ .col-75 {
+    color: #ddd;
+}
+
+
+
+
+.checkbox-button {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    /* border-radius: 50%;  circle */
+    border: none;
     display: inline-block;
-    vertical-align: center;
+    position: relative;
     
 }
 
-.item-column {
-    display: inline-block;
-}
-
-.checkbox-button {
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  display: inline-block;
-  position: relative;
-}
-
 .button-column {
-  display: flex;
-  margin-left: 10px;
-  margin-right: 0;
+    display: flex;
+    margin-left: 10px;
+    margin-right: 0;
 }
 
 .checkbox-button:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 1px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: none;
+}
+
+.checkbox-button:checked {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .checkbox-button:checked:after {
-  content: "✔";
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #2ecc71;
-  font-size: 12px;
-  font-weight: bold;
+    content: "✓";
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #00ff95;
 }
 
 .delete-button {
@@ -231,6 +232,9 @@ body.night-mode .sidebar{
     color: #fff;
 }
 
+body.night-mode .checkbox-button:checked ~ .col-75 {
+    color:#666;
+}
 
 #sidebar-toggle {
     width: 30px;
@@ -251,6 +255,12 @@ body.night-mode #sidebar-toggle {
     background-color: #555555;
     color: #ffffff;
 }
+
+body.night-mode .add-item {
+    background-color: #555555;
+    color: #ffffff;
+}
+
 
 #sidebar-toggle:before {
     content: '\2039';
