@@ -26,3 +26,23 @@ def show_table_info(database, table):
     conn.close()
 
 show_table_info("test_items.db", "items")
+
+print("-------")
+# connect to the database
+conn = sqlite3.connect('test_items.db')
+
+# create a cursor object
+cur = conn.cursor()
+
+# execute a SELECT statement to fetch all rows from a table
+cur.execute('SELECT * FROM todo_lists')
+
+# fetch all rows and print them
+rows = cur.fetchall()
+for row in rows:
+    print(row)
+
+# close the cursor and the connection
+cur.close()
+conn.close()
+show_table_info("test_items.db", "todo_lists")
