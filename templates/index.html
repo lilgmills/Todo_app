@@ -7,8 +7,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 </head>
 <body>
-    <h1>Todo List</h1>
-    <div class="sidebar show" >
+    <form id="todoListForm">
+        <h1 id="todoListName" textContent="{{  todo_list_name }}">{{  todo_list_name }}</h1>
+
+    </form>
+    <div class="sidebar show">
         <div class="user-profile">
             <div class="profile-picture">U</div>
             <div class="profile-name">User Profile</div>
@@ -59,30 +62,32 @@
         </div>
         {% endif %}
 
-        </div>
+    </div>
 
 
-        <label class="switch">
+    <label class="switch">
 
 
-            <input type="checkbox" id="night-mode-toggle">
+        <input type="checkbox" id="night-mode-toggle">
 
 
 
-            <span class="slider round"></span>
-            <div class="night-mode-text">night mode</div>
-
-        </label>
+        <span class="slider round"></span>
 
 
-        <form class="add-item" id="new-item-form" method="post" action="{{ url_for('add_item') }}">
-            <input type="text" id="new-item-input" placeholder="Add a new item..." name="new_item" autocomplete="off">
-            <button class="add-button" type="submit" title="Add item">Add</button>
-        </form>
+    </label>
+    
 
 
-        <script src="{{url_for('static', filename='valid-add-item.js') }}"></script>
-        <script src="{{url_for('static', filename='night-mode-toggle.js') }}"></script>
-        <script src="{{url_for('static', filename='sidebar-toggle.js') }}"></script>
+    <form class="add-item" id="new-item-form" method="post" action="{{ url_for('add_item') }}">
+        <input type="text" id="new-item-input" placeholder="Add a new item..." name="new_item" autocomplete="off">
+        <button class="add-button" type="submit" title="Add item">Add</button>
+    </form>
+
+
+    <script src="{{url_for('static', filename='valid-add-item.js') }}"></script>
+    <script src="{{url_for('static', filename='night-mode-toggle.js') }}"></script>
+    <script src="{{url_for('static', filename='sidebar-toggle.js') }}"></script>
+    <script src="{{url_for('static', filename='edit-todo-list.js')}}"></script>
 </body>
 </html>

@@ -2,15 +2,19 @@
 <html>
 <head>
     <title>Edit Item</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 </head>
 <body>
     <h1>Edit Item</h1>
-    <form method="POST" action="{{ url_for("post_edit") }}">
+    <div class="container" "><form method="POST" action="{{ url_for("post_edit") }}">
         <input type="text" id="description" name="new_text" value="{{ desc}}" required>
-        <input type ="hidden" name="item_id" value="{{ item_id }}">
-        
-        
+        <input type="hidden" name="item_id" value="{{ item_id }}">
+
+
         <button type="submit">Save</button>
-    </form>
+        </form>
+    </div>
+    
 </body>
 </html>

@@ -122,7 +122,7 @@ form.add-item {
 
 .col-75 {
   display: inline-block;
-  vertical-align: center;
+  vertical-align: middle;
 }
 
 .checkbox-button:checked ~ .col-75 {
@@ -136,18 +136,14 @@ form.add-item {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    vertical-align: middle;
     /* border-radius: 50%;  circle */
     border: none;
     display: inline-block;
     position: relative;
-    
 }
 
-.button-column {
-    display: flex;
-    margin-left: 10px;
-    margin-right: 0;
-}
+
 
 .checkbox-button:after {
     display: flex;
@@ -174,6 +170,12 @@ form.add-item {
     align-items: center;
     color: #fff;
     background-color: #00ff95;
+}
+
+.button-column {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 0;
 }
 
 .delete-button {
@@ -320,12 +322,23 @@ body.night-mode .add-item {
   z-index: 1;
 }
 
-.night-mode-text {
+label.switch:after {
     font-family: 'Open Sans', sans-serif;
     display: inline-block;
     margin-left: 5px;
     color: #333;
+    content:"night mode";
 }
+
+body.night-mode .switch:after {
+    font-family: 'Open Sans', sans-serif;
+    display: inline-block;
+    margin-left: 5px;
+    color: #eee;
+    content: "night mode";
+}
+
+
  
 html, body {
   height: 100%;

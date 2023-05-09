@@ -1,6 +1,14 @@
+DROP TABLE IF EXISTS todo_lists;
+CREATE TABLE todo_lists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
 DROP TABLE IF EXISTS items;
 CREATE TABLE items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    done INTEGER NOT NULL
+    done INTEGER DEFAULT 0,
+    todo_list_id INTEGER NOT NULL,
+    FOREIGN KEY (todo_list_id) REFERENCES todo_lists(id)
 );

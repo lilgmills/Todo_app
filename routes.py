@@ -2,7 +2,8 @@ from flask import Flask
 from flask import request, redirect, url_for, render_template
 import os
 
-from database import get_items, add_task, delete_task, edit_task, update_completed_task, create_todo_table, get_db_connection
+from database import get_items, get_current_list_name, update_list_name, add_task, delete_task, edit_task, update_completed_task, create_schema, get_db_connection
+from database import current_todo_id
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 DATABASE=os.path.join(basedir,'test_items.db')
@@ -14,8 +15,9 @@ app.config.from_mapping(
 
 @app.route('/')
 def index():
-    test_items = get_items('test_items.db')
-    return render_template('index.html', items=test_items)
+    test_items = get_items(DATABASE, current_todo_id)
+    todo_list_name = get_current_list_name(DATABASE, current_todo_id)
+    return render_template('index.html', items=test_items, todo_list_name=todo_list_name)
 
 @app.route('/sort', methods = ['GET'])
 def sort():
@@ -25,8 +27,16 @@ def sort():
 @app.route('/add_item/', methods= ['POST'])
 def add_item():
     new_item = request.form['new_item']
-    add_task(DATABASE, new_item)
+    add_task(DATABASE, new_item, current_todo_id)
     return redirect(url_for(('index')))
+
+@app.route('/update_todo_list_name', methods=['POST'])
+def update_todo_list_name():
+    new_name = request.json['new_name']
+    todo_list_id = current_todo_id
+    update_list_name(DATABASE, todo_list_id, new_name)
+    return redirect(url_for(('index')))
+
 
 @app.route('/update_item/', methods = ['POST'])
 def update_item():
@@ -73,6 +83,6 @@ def init_db():
 
 # run the app
 if __name__ == '__main__':
-    #init_db()
-    create_todo_table(DATABASE)
+    
+    create_schema(DATABASE)
     app.run(port=8000, debug=True)
