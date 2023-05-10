@@ -16,7 +16,7 @@ function editTodoList() {
         if (event.keyCode === 13) {
             event.preventDefault();
             let newName = input.value;
-            if (newName !== originalName) {
+            if (newName !== originalName && newName !== "" && newName !== null) {
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "/update_todo_list_name");
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -49,11 +49,11 @@ function updateTodoListName() {
     let originalName = todoListName.textContent;
     let input = document.querySelector("#todoListNameInput");
     let newName = input.value;
-    if (newName !== originalName) {
+    if (newName !== originalName && newName !== "" && newName !== null) {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "/update_todo_list_name");
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify({ new_name: newName }));
+        xhr.send(JSON.stringify({ "new_name" : newName }));
         xhr.onload = function () {
             if (xhr.status === 200) {
                 todoListName.textContent = newName;

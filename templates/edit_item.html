@@ -7,7 +7,8 @@
 </head>
 <body>
     <h1>Edit Item</h1>
-    <div class="container" "><form method="POST" action="{{ url_for("post_edit") }}">
+    <div class="container">
+        <form method="POST" action="{{ url_for("post_edit") }}">
         <input type="text" id="description" name="new_text" value="{{ desc}}" required>
         <input type="hidden" name="item_id" value="{{ item_id }}">
 
