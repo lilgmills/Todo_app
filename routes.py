@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request, redirect, url_for, render_template
 import os
 
-from database import get_items, get_current_list_name, update_list_name, add_task, delete_task, edit_task, update_completed_task, create_schema, get_db_connection
+from database import get_items, get_current_list_name, update_list_name, add_task, delete_task, update_completed_task, create_schema, get_db_connection
 from database import current_todo_id
 
 basedir = os.path.abspath(os.path.dirname(__file__))

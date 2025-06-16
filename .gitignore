@@ -6,3 +6,6 @@ venv/
 
 # Ignore database files
 *.db
+
+Scripts/
+Lib/

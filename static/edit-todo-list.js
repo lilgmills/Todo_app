@@ -1,22 +1,25 @@
+// Get references to the necessary elements
 const todoListForm = document.getElementById("todoListForm");
+const todoListName = document.querySelector("#todoListName");
+const originalName = todoListName.textContent;
+const todoListNameInput = document.createElement("input");
+todoListNameInput.type = "text";
+todoListNameInput.value = originalName;
+todoListNameInput.id = "todoListNameInput";
+todoListNameInput.autocomplete = "off";
 
+// Function to handle editing the todo list name
 function editTodoList() {
-    let todoListName = document.querySelector("#todoListName");
-    let originalName = todoListName.textContent;
-    let input = document.createElement("input");
-    input.type = "text";
-    input.value = originalName;
-    input.id = "todoListNameInput"
+    let isUpdated = false;
 
-    // Remove the blur event listener when the input is created
-    input.removeEventListener("blur", updateTodoListName);
-
-    input.addEventListener("keydown", function (event) {
+    // Event listener for keydown events in the input field
+    todoListNameInput.addEventListener("keydown", function (event) {
         // Check if the key pressed was the enter key
         if (event.keyCode === 13) {
             event.preventDefault();
-            let newName = input.value;
-            if (newName !== originalName && newName !== "" && newName !== null) {
+            let newName = todoListNameInput.value;
+            if (newName !== originalName) {
+                // Send a POST request to update the todo list name
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "/update_todo_list_name");
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -24,6 +27,7 @@ function editTodoList() {
                 xhr.onload = function () {
                     if (xhr.status === 200) {
                         todoListName.textContent = newName;
+                        isUpdated = true;
                     } else {
                         todoListName.textContent = originalName;
                     }
@@ -32,28 +36,37 @@ function editTodoList() {
                 todoListName.textContent = originalName;
             }
             // Add the blur event listener when the input is updated
-            input.addEventListener("blur", updateTodoListName);
+            todoListNameInput.addEventListener("blur", updateTodoListName);
         }
     });
 
+    // Clear the todo list name and append the input field
     todoListName.textContent = "";
-    todoListName.appendChild(input);
-    input.focus();
+    todoListName.appendChild(todoListNameInput);
+    todoListNameInput.focus();
 
     // Add the blur event listener when the input is created
-    input.addEventListener("blur", updateTodoListName);
+    todoListNameInput.addEventListener("blur", function () {
+        if (!isUpdated) {
+            if (todoListNameInput.value === "") {
+                todoListName.textContent = "Todo List";
+            } else {
+                todoListName.textContent = originalName;
+            }
+        }
+        updateTodoListName();
+    });
 }
 
+// Function to update the todo list name
 function updateTodoListName() {
-    let todoListName = document.querySelector("#todoListName");
-    let originalName = todoListName.textContent;
-    let input = document.querySelector("#todoListNameInput");
-    let newName = input.value;
+    let newName = todoListNameInput.value;
     if (newName !== originalName && newName !== "" && newName !== null) {
+        // Send a POST request to update the todo list name
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "/update_todo_list_name");
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify({ "new_name" : newName }));
+        xhr.send(JSON.stringify({ "new_name": newName }));
         xhr.onload = function () {
             if (xhr.status === 200) {
                 todoListName.textContent = newName;
@@ -65,22 +78,29 @@ function updateTodoListName() {
         todoListName.textContent = originalName;
     }
     // Remove the blur event listener after the input is updated
-    input.removeEventListener("blur", updateTodoListName);
+    todoListNameInput.removeEventListener("blur", updateTodoListName);
 }
 
+// Event listener for clicking on the todo list name header
 let todoListNameHeader = document.querySelector("h1");
 todoListNameHeader.addEventListener("click", editTodoList);
 
+// Event listener for submitting the todo list form
 todoListForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const newName = document.getElementById("todoListNameInput").value;
+    let newName = document.getElementById("todoListNameInput").value;
+    if (newName === "" || newName === null) {
+        newName = "Todo List";
+    }
+    // Send a POST request to update the todo list in database
     fetch("/update_todo_list_name", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({new_name: newName })
+        body: JSON.stringify({ "new_name": newName })
     }).then(() => {
         location.reload();
     });
+
 });
