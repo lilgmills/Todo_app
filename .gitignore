@@ -9,3 +9,5 @@ venv/
 
 Scripts/
 Lib/
+
+pyvenv.cfg
