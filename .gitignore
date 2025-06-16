@@ -11,3 +11,5 @@ Scripts/
 Lib/
 
 pyvenv.cfg
+
+templates/.vs/
